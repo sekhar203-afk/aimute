@@ -1,0 +1,207 @@
+{
+  "schema": 1,
+  "updated": "2026-11-10i",
+  "sites": [
+    {
+      "id": "google",
+      "label": "Google Search",
+      "hosts": [
+        "^www\\.google\\.[a-z.]+$"
+      ],
+      "protect": "#rso, #search, #center_col, #rcnt, [role='main']:not(#m-x-content [role='main'])",
+      "maxResultTitles": 2,
+      "resultTitle": "a[href] h3",
+      "stopIds": [
+        "rso",
+        "rcnt",
+        "center_col",
+        "search"
+      ],
+      "rules": [
+        {
+          "kind": "selector",
+          "sel": "#m-x-content"
+        },
+        {
+          "kind": "marker",
+          "sel": "[data-async-type='folsrch'], [id^='folsrch']",
+          "climb": "google"
+        },
+        {
+          "kind": "heading",
+          "sel": "[role='heading'], h1, h2",
+          "text": [
+            "^ai overview$",
+            "^ai overviews$",
+            "^übersicht mit ki$",
+            "^aperçu ia$",
+            "^aperçu généré par l'ia$",
+            "^vista creada con ia$",
+            "^resumen de ia$",
+            "^visão geral criada por ia$",
+            "^panoramica ai$",
+            "^ai-overzicht$",
+            "^ai-oversigt$",
+            "^přehled od ai$",
+            "^prezentare generală generată de ai$",
+            "^обзор от ии$",
+            "^ai による概要$",
+            "^ai 摘要$",
+            "^ai 개요$",
+            "^एआई से खास जानकारी$",
+            "^yapay zeka genel bakışı$",
+            "^przegląd od ai$"
+          ],
+          "climb": "google"
+        },
+        {
+          "kind": "link",
+          "sel": "a[href*='udm=']",
+          "param": "udm",
+          "value": "50",
+          "up": "[role='listitem']"
+        },
+        {
+          "kind": "text",
+          "sel": "[role='listitem'], [role='tab']",
+          "text": [
+            "^ai mode$"
+          ]
+        },
+        {
+          "kind": "text",
+          "sel": "button, [role='button'], a",
+          "text": [
+            "^ai mode$"
+          ],
+          "protectExtra": "#searchform, form, textarea, input"
+        },
+        {
+          "kind": "text",
+          "sel": "span, div",
+          "text": [
+            "^ai mode$"
+          ],
+          "leaf": true,
+          "up": "button, [role='button'], a",
+          "protectExtra": "#searchform, form, textarea, input"
+        },
+        {
+          "kind": "selector",
+          "sel": "[data-initq], div.related-question-pair",
+          "climb": "google",
+          "option": "googlePaa"
+        }
+      ]
+    },
+    {
+      "id": "gworkspace",
+      "label": "Gmail, Drive & Docs (Gemini)",
+      "hosts": [
+        "^mail\\.google\\.com$",
+        "^drive\\.google\\.com$",
+        "^docs\\.google\\.com$"
+      ],
+      "protect": "[role='main'], [role='textbox'], [contenteditable='true'], .kix-appview-editor, [role='grid'], [role='list']",
+      "rules": [
+        {
+          "kind": "selector",
+          "sel": "button[aria-label*='Gemini' i], [role='button'][aria-label*='Gemini' i], a[aria-label*='Gemini' i]"
+        },
+        {
+          "kind": "selector",
+          "sel": "button[data-tooltip*='Gemini' i], [role='button'][data-tooltip*='Gemini' i]"
+        },
+        {
+          "kind": "selector",
+          "sel": "[aria-label*='Gemini' i]:not(tr):not(td):not([role='row']):not([role='gridcell']):not([role='option']):not([role='listitem']):not([role='main']):not([role='link']), [data-tooltip*='Gemini' i]:not(tr):not(td):not([role='row']):not([role='gridcell'])"
+        },
+        {
+          "kind": "selector",
+          "sel": ".yIGn2b",
+          "up": "[jscontroller]"
+        },
+        {
+          "kind": "selector",
+          "sel": "div[jslog^='194062;']"
+        },
+        {
+          "kind": "selector",
+          "sel": "button[aria-label*='Help me write' i], [role='button'][aria-label*='Help me write' i]"
+        },
+        {
+          "kind": "selector",
+          "sel": "button[aria-label*='Summarize this email' i], [role='button'][aria-label*='Summarize this email' i]"
+        },
+        {
+          "kind": "text",
+          "sel": "button, [role='button']",
+          "text": [
+            "^ask gemini$",
+            "^summarize this email$",
+            "^help me write$",
+            "^help me create$"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "youtube",
+      "label": "YouTube",
+      "hosts": [
+        "^www\\.youtube\\.com$"
+      ],
+      "protect": "#movie_player, ytd-app, #columns, #primary, #secondary, ytd-watch-flexy, #contents, ytd-rich-grid-renderer",
+      "rules": [
+        {
+          "kind": "selector",
+          "sel": "button[aria-label='Ask' i]",
+          "up": "yt-button-view-model, ytd-button-renderer"
+        },
+        {
+          "kind": "selector",
+          "sel": "button[aria-label*='Ask about this video' i], button[aria-label*='Ask Gemini' i]",
+          "up": "yt-button-view-model, ytd-button-renderer"
+        },
+        {
+          "kind": "text",
+          "sel": "button",
+          "text": [
+            "^ask$"
+          ],
+          "up": "yt-button-view-model, ytd-button-renderer"
+        }
+      ]
+    },
+    {
+      "id": "amazon",
+      "label": "Amazon (Rufus / Alexa for Shopping)",
+      "hosts": [
+        "^www\\.amazon\\.[a-z.]+$"
+      ],
+      "protect": "#dp, #dp-container, #search, #a-page, #pageContent, #centerCol, #ppd, #nav-belt, #navbar, #nav-main, [role='main'], .s-main-slot, .a-price, #productTitle, #landingImage, #add-to-cart-button, #buy-now-button, #corePrice_feature_div, #corePriceDisplay_desktop_feature_div",
+      "rules": [
+        {
+          "kind": "selector",
+          "sel": "[id*='rufus' i]:not(html):not(body), [class*='rufus' i]:not(html):not(body)"
+        },
+        {
+          "kind": "selector",
+          "sel": "[data-csa-c-slot-id*='rufus' i], [data-csa-c-content-id*='rufus' i]"
+        },
+        {
+          "kind": "selector",
+          "sel": "[aria-label*='Rufus' i], [aria-label*='Alexa for Shopping' i]"
+        },
+        {
+          "kind": "selector",
+          "sel": "[data-action='dpx-rufus-connect']",
+          "up": "#nile-inline_feature_div"
+        }
+      ],
+      "keep": {
+        "amazonKeepPriceHistory": "[id^='rufus-price-ingress'], .rufus-ingress-div-block, .rufus-ingress-badge, [data-action='show-rufus-price-ingress'], #nav-flyout-rufus"
+      }
+    }
+  ]
+}
