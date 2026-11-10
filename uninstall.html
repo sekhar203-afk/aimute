@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Mute – Sorry to see you go</title>
+<style>
+  :root { --bg: #ffffff; --fg: #1d1d1f; --muted: #6e6e73; --line: #e5e5ea; --accent: #5b4bdb; --soft: #efedff; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1c1c1e; --fg: #f2f2f7; --muted: #a1a1a6; --line: #38383a; --accent: #8e82ff; --soft: #2c2850; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 600px; margin: 0 auto; padding: 48px 16px; }
+  h1 { font-size: 26px; margin: 0 0 6px; }
+  .lead { color: var(--muted); margin: 0 0 24px; }
+  .reasons { display: grid; gap: 10px; }
+  .reasons a { display: block; padding: 12px 16px; border: 1px solid var(--line); border-radius: 10px; color: var(--fg); text-decoration: none; }
+  .reasons a:hover, .reasons a:focus-visible { border-color: var(--accent); background: var(--soft); outline: none; }
+  .back { margin-top: 28px; padding: 16px; border-radius: 10px; background: var(--soft); }
+  .back a { color: var(--accent); font-weight: 600; }
+  small { color: var(--muted); display: block; margin-top: 24px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>AI Mute is removed</h1>
+  <p class="lead">Sorry to see you go. Why did you leave? One click opens a short email to us. It helps us make AI Mute better.</p>
+
+  <div class="reasons" id="reasons">
+    <a data-r="It didn't hide the AI on a page">It didn't hide the AI on a page</a>
+    <a data-r="It hid something I wanted to see">It hid something I wanted to see</a>
+    <a data-r="A page looked broken or empty">A page looked broken or empty</a>
+    <a data-r="I want to see the AI answers again">I want to see the AI answers again</a>
+    <a data-r="I just installed it to try it">I just installed it to try it</a>
+    <a data-r="Something else">Something else</a>
+  </div>
+
+  <div class="back">
+    Removed it by mistake? <a href="https://chromewebstore.google.com/detail/amckjejdikaifbbenmdalkkelmijjpib">Add AI Mute again</a>
+  </div>
+
+  <small>No data was sent when you opened this page. An email is only sent if you choose to send it.</small>
+</main>
+<script>
+  // Each reason opens a ready email. Nothing is sent automatically.
+  for (const a of document.querySelectorAll("#reasons a")) {
+    const r = a.dataset.r;
+    const body = "Reason: " + r + "\n\nAnything else you'd like to tell us (optional):\n\n";
+    a.href = "mailto:hi@digitalshekhar.com?subject=" + encodeURIComponent("AI Mute feedback: " + r) +
+      "&body=" + encodeURIComponent(body);
+  }
+</script>
+</body>
+</html>
