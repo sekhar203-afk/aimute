@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated": "2026-11-10i",
+  "updated": "2026-11-21a",
   "sites": [
     {
       "id": "google",
@@ -20,7 +20,8 @@
       "rules": [
         {
           "kind": "selector",
-          "sel": "#m-x-content"
+          "sel": "#m-x-content",
+          "climb": "google"
         },
         {
           "kind": "marker",
